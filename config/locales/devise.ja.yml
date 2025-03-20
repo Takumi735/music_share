@@ -1,0 +1,11 @@
+ja:
+  devise:
+    failure:
+      invalid: "メールアドレスまたはパスワードが正しくありません"
+    sessions:
+      signed_in: "ログインに成功しました"
+      signed_out: "ログアウトしました"
+    registrations:
+      user:
+        signed_up: "アカウント登録が完了しました。"
+      signed_up: "アカウント登録が完了しました"

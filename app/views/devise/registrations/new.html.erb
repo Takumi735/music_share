@@ -1,29 +1,44 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<main class="d-flex align-items-center justify-content-center main-container">
+  <div class="card p-4 card-container">
+    <h2 class="mb-3 text-center">新規登録</h2>
+    <%= form_with(model: resource, url: registration_path(resource_name), local: true) do |f| %>
+      <div class="form-floating mb-3">
+        <%= f.text_field :name, class: "form-control #{'is-invalid' if resource.errors[:name].present?}", id: "floatingName", placeholder: "Your Name", autofocus: true, autocomplete: "name" %>
+        <%= f.label :name, "Name", for: "floatingName" %>
+        <% if resource.errors[:name].present? %>
+          <div class="invalid-feedback">
+            <%= resource.errors[:name].join(", ") %>
+          </div>
+        <% end %>
+      </div>
+      <div class="form-floating mb-3">
+        <%= f.email_field :email, class: "form-control #{'is-invalid' if resource.errors[:email].present?}", id: "floatingInput", placeholder: "name@example.com", autocomplete: "email" %>
+        <%= f.label :email, "Email address", for: "floatingInput" %>
+        <% if resource.errors[:email].present? %>
+          <div class="invalid-feedback">
+            <%= resource.errors[:email].join(", ") %>
+          </div>
+        <% end %>
+      </div>
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, class: "form-control #{'is-invalid' if resource.errors[:password].present?}", id: "floatingPassword", placeholder: "Password", autocomplete: "current-password" %>
+        <%= f.label :password, "Password", for: "floatingPassword" %>
+        <% if resource.errors[:password].present? %>
+          <div class="invalid-feedback">
+            <%= resource.errors[:password].join(", ") %>
+          </div>
+        <% end %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check my-3">
+          <%= f.check_box :remember_me, class: "form-check-input", id: "flexCheckDefault" %>
+          <%= f.label :remember_me, "ログイン状態を保持", class: "form-check-label", for: "flexCheckDefault" %>
+        </div>
+      <% end %>
+      <button class="btn btn-primary w-100 btn-lg" type="submit">新規登録</button>
+      <div class="text-center mt-3">
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</main>
