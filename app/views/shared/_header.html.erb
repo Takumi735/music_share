@@ -1,0 +1,18 @@
+<header class="p-3 text-bg-success fixed-top">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <h4 class="m-0"><%= link_to 'Music Share', "#", class: 'nav-link px-2 text-white' %></h4>
+      </ul>
+      <% if user_signed_in? %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn btn-outline-light me-2", role: "button" %>
+      </div>
+    <% else %>
+      <div class="text-end">
+        <%= link_to 'ログイン', new_user_session_path, class: "btn btn-outline-light me-2" %>
+        <%= link_to '新規登録', new_user_registration_path, class: "btn btn-warning" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+</header>
