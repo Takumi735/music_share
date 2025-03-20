@@ -54,3 +54,4 @@ end
 
 gem "mysql2"
 gem "dotenv-rails"
+gem "devise"
