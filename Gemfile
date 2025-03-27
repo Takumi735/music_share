@@ -54,3 +54,6 @@ end
 
 gem "mysql2"
 gem "dotenv-rails"
+gem "devise"
+gem "bootstrap", "~> 5.3.0"
+gem "sassc-rails"
