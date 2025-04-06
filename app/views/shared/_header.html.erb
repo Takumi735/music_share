@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <h4 class="m-0"><%= link_to 'Music Share', "#", class: 'nav-link px-2 text-white' %></h4>
+        <h4 class="m-0"><%= link_to 'Music Share', root_path, class: 'nav-link px-2 text-white' %></h4>
       </ul>
       <% if user_signed_in? %>
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn btn-outline-light me-2", role: "button" %>
