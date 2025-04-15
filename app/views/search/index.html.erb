@@ -18,32 +18,38 @@
       <div class="mt-3">
         <% if params[:search_type] == "artist" %>
           <% @artists.each do |artist| %>
-            <div class="card mb-3 p-2 text-white">
-              <div class="card-body d-flex align-items-center">
-                <% if artist.images.any? %>
-                  <img src="<%= artist.images.first["url"] %>" alt="<%= artist.name %>" width="50" class="me-3 rounded-circle">
-                <% else %>
-                  <img src="/assets/no_image.png" alt="No Image" width="50" class="me-3 rounded-circle">
-                <% end %>
-                <h6 class="mb-0"><%= artist.name %></h6>
+            <%= link_to posts_path(artist_name: artist.name), class: "text-decoration-none" do %>
+              <div class="card mb-3 p-2 text-white">
+                <div class="card-body d-flex align-items-center">
+                  <% if artist.images.any? %>
+                    <img src="<%= artist.images.first["url"] %>" alt="<%= artist.name %>" width="50" class="me-3 rounded-circle">
+                  <% else %>
+                    <img src="/assets/no_image.png" alt="No Image" width="50" class="me-3 rounded-circle">
+                  <% end %>
+                  <h6 class="mb-0"><%= artist.name %></h6>
+                </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
         <% elsif params[:search_type] == "track" %>
           <% @tracks.each do |track| %>
-            <div class="card mb-3 p-2 text-white">
-              <div class="card-body d-flex align-items-center">
-                <% if track.album && track.album.images.any? %>
-                  <img src="<%= track.album.images.first["url"] %>" alt="<%= track.name %>" width="50" class="me-3 rounded">
-                <% else %>
-                  <img src="/assets/no_image.png" alt="No Image" width="50" class="me-3 rounded">
-                <% end %>
-                <div class="card-track">
-                  <h6 class="card-title mb-0"><%= track.name %></h6>
-                  <p class="card-text small"><%= track.artists.first.name %></p>
+            <% artist_name = track.artists.first.name %>
+            <% song_title = track.name %>
+            <%= link_to posts_path(artist_name: artist_name, song_title: song_title), class: "text-decoration-none" do %>
+              <div class="card mb-3 p-2 text-white">
+                <div class="card-body d-flex align-items-center">
+                  <% if track.album && track.album.images.any? %>
+                    <img src="<%= track.album.images.first["url"] %>" alt="<%= track.name %>" width="50" class="me-3 rounded">
+                  <% else %>
+                    <img src="/assets/no_image.png" alt="No Image" width="50" class="me-3 rounded">
+                  <% end %>
+                  <div class="card-track">
+                    <h6 class="card-title mb-0"><%= track.name %></h6>
+                    <p class="card-text small"><%= track.artists.first.name %></p>
+                  </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>
