@@ -1,0 +1,6 @@
+<div class="mb-5">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :query, value: params[:query], class: "form-control me-2", placeholder: "曲を検索" %>
+    <%= f.hidden_field :search_type, value: params[:search_type] || "artist" %>
+  <% end %>
+</div>
