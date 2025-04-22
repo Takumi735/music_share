@@ -3,6 +3,7 @@
 @import "posts";
 @import "menu";
 @import "search";
+@import "track_result";
 
 html,
 body {
@@ -21,4 +22,9 @@ body {
 
 .custom-card:hover {
   opacity: 1;
+}
+
+.track-image {
+  width: 64px;
+  height: 64px;
 }
