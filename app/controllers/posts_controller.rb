@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: [ :new, :create, :destroy ]
   def index
     @posts = Post.all
 
@@ -15,11 +16,27 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = Post.new
   end
 
   def create
+    @post = Post.new(post_params.merge(user: current_user))
+
+    if @post.save
+      redirect_to posts_path, notice: "投稿しました！"
+    else
+      render :new
+    end
   end
 
   def destroy
+    @post.destroy
+    redirect_to posts_path, notice: "投稿を削除しました。"
   end
 end
+
+private
+
+  def post_params
+    params.require(:post).permit(:spotify_track_id, :song_title, :artist_name, :content)
+  end
