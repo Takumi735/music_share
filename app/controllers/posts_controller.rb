@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :destroy ]
   def index
-    @posts = Post.all
+    @posts = Post.order(created_at: :desc)
 
     if params[:artist_name].present?
       @posts = @posts.where(artist_name: params[:artist_name])
