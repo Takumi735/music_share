@@ -3,13 +3,42 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="like-toggle"
 export default class extends Controller {
   static targets = ["icon"]
+  static values = { liked: Boolean, postId: Number }
+
+  connect() {
+    this.updateIcon()
+  }
 
   toggle(event) {
-    event.stopPropagation();
-    event.preventDefault(); 
+    event.preventDefault()
+    event.stopPropagation()
 
+    const method = this.likedValue ? "DELETE" : "POST"
+    const url = `/posts/${this.postIdValue}/like`
+
+    fetch(url, {
+      method: method,
+      headers: {
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin"
+    }).then(response => {
+      if (response.ok) {
+        this.likedValue = !this.likedValue
+        this.updateIcon()
+      }
+    })
+  }
+
+  updateIcon() {
     const icon = this.iconTarget
-    icon.classList.toggle("bi-heart")
-    icon.classList.toggle("bi-heart-fill")
+    if (this.likedValue) {
+      icon.classList.remove("bi-heart")
+      icon.classList.add("bi-heart-fill")
+    } else {
+      icon.classList.remove("bi-heart-fill")
+      icon.classList.add("bi-heart")
+    }
   }
 }

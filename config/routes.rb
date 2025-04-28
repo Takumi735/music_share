@@ -11,4 +11,8 @@ devise_scope :user do
   end
 
 get "tracks/search", to: "tracks#search", as: "search_tracks"
+
+resources :posts do
+  resource :like, only: [ :create, :destroy ]
+end
 end
