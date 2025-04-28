@@ -17,11 +17,17 @@
               <% if post.content.present? %>
                 <p class="mt-2 text-white p"><%= post.content %></p>
               <% end %>
-              <div class="mt-2">
-                <button class="border-0 bg-transparent like-button">
-                  <i class="bi bi-heart fs-5 text-danger "></i>
-                </button>
-              </div>
+              <% if user_signed_in? %>
+                <div class="mt-2">
+                  <div data-controller = "like-toggle"
+                  data-like-toggle-liked-value="<%= post.likes.exists?(user: current_user) %>"
+                  data-like-toggle-post-id-value="<%= post.id %>">
+                    <button class="border-0 bg-transparent like-button" data-action="click->like-toggle#toggle">
+                      <i data-like-toggle-target="icon" class="bi fs-5 text-danger"></i>
+                    </button>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>
