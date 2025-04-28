@@ -20,5 +20,6 @@
     <%= render "shared/header" %>
     <%= yield %>
     <%= render "shared/toast", message: flash[:notice] if flash[:notice].present? %>
+    <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3 z-3"></div>
   </body>
 </html>
