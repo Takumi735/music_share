@@ -22,9 +22,9 @@
               <div class="card mb-3 p-2 text-white">
                 <div class="card-body d-flex align-items-center">
                   <% if artist.images.any? %>
-                    <img src="<%= artist.images.first["url"] %>" alt="<%= artist.name %>" width="50" class="me-3 rounded-circle">
+                    <%= image_tag(artist.images.first["url"], alt: artist.name, class: "me-3 rounded-circle search-image") %>
                   <% else %>
-                    <img src="/assets/no_image.png" alt="No Image" width="50" class="me-3 rounded-circle">
+                    <%= image_tag("no_image.png", alt: "No Image", class: "me-3 rounded-circle search-image") %>
                   <% end %>
                   <h6 class="mb-0"><%= artist.name %></h6>
                 </div>
@@ -39,9 +39,9 @@
               <div class="card mb-3 p-2 text-white">
                 <div class="card-body d-flex align-items-center">
                   <% if track.album && track.album.images.any? %>
-                    <img src="<%= track.album.images.first["url"] %>" alt="<%= track.name %>" width="50" class="me-3 rounded">
+                    <%= image_tag(track.album.images.first["url"], alt: track.name, class: "me-3 rounded search-image") %>
                   <% else %>
-                    <img src="/assets/no_image.png" alt="No Image" width="50" class="me-3 rounded">
+                    <%= image_tag("no_image.png", alt: "No Image", class: "me-3 rounded search-image") %>
                   <% end %>
                   <div class="card-track">
                     <h6 class="card-title mb-0"><%= track.name %></h6>
