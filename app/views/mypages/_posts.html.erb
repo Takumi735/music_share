@@ -1,0 +1,31 @@
+<div class="container my-5">
+  <div class="row">
+    <% posts.each do |post| %>
+      <%= link_to post_path(post), class: "text-decoration-none" do %>
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="card-header d-flex justify-content-between">
+              <h5 class="user-name text-white"><%= post.user.name %></h5>
+              <p class="text-white small mb-0"><%= time_ago_in_words(post.created_at, include_seconds: true) %>前</p>
+            </div>
+            <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/<%= post.spotify_track_id %>?utm_source=generator" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <% if post.content.present? %>
+              <p class="mt-2 text-white p"><%= post.content %></p>
+            <% end %>
+            <% if user_signed_in? %>
+              <div class="mt-2">
+                <div data-controller = "like-toggle"
+                  data-like-toggle-liked-value="<%= post.likes.exists?(user: current_user) %>"
+                  data-like-toggle-post-id-value="<%= post.id %>">
+                  <button class="border-0 bg-transparent like-button" data-action="click->like-toggle#toggle">
+                    <i data-like-toggle-target="icon" class="bi fs-5 text-danger"></i>
+                  </button>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -13,6 +13,8 @@ ja:
             password:
               blank: "パスワードを入力してください"
               too_short: "パスワードは最低 %{count} 文字以上にしてください"
+            current_password:
+              blank: "現在のパスワードを入力してください"
 
   devise:
     failure:
@@ -23,6 +25,7 @@ ja:
       signed_out: "ログアウトしました"
     registrations:
       signed_up: "アカウント登録が完了しました"
+      updated: "アカウント情報を更新しました"
 
   time:
     formats:
