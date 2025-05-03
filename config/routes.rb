@@ -4,10 +4,9 @@ Rails.application.routes.draw do
   get "search", to: "search#index"
   get "tracks/search", to: "tracks#search", as: "search_tracks"
 
-  resources :posts, only: [ :index, :show, :new, :create, :destroy ]
-
-  resources :posts do
+  resources :posts, only: [ :index, :show, :new, :create, :destroy ] do
     resource :like, only: [ :create, :destroy ]
+    resources :comments, only: [ :create ]
   end
 
   devise_for :users
