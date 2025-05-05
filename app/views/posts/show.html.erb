@@ -19,6 +19,13 @@
       <% if user_signed_in? %>
         <div class="mb-4">
           <%= form_with(model: [@post, @comment], local: true) do |f| %>
+            <% if @comment.errors.any? %>
+              <div class="alert alert-danger py-2">
+                <% @comment.errors[:content].each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
+              </div>
+            <% end %>
             <div class="mb-3">
               <%= f.text_area :content, class: "comment-form w-100 text-white bg-transparent border-0 border-bottom", rows: 1, placeholder: "コメントを入力...",
               data: { controller: "auto-resize", action: "input->auto-resize#onInput" }%>
