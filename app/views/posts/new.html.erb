@@ -1,6 +1,6 @@
 <div class="container py-5">
   <div class="post-container mx-auto p-4 bg-white rounded">
-    <%= form_with(model: @post, local: true) do |f| %>
+    <%= form_with(model: @post, local: true, data: { turbo: false }) do |f| %>
       <div class="d-flex justify-content-center align-items-center mb-4">
         <h5 class="mb-0 dflex">投稿を作成</h5>
       </div>

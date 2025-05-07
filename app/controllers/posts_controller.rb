@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :destroy ]
   def index
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.order(created_at: :desc).page(params[:page])
 
     if params[:artist_name].present?
       @posts = @posts.where(artist_name: params[:artist_name])
@@ -10,12 +10,22 @@ class PostsController < ApplicationController
     if params[:song_title].present?
       @posts = @posts.where(song_title: params[:song_title])
     end
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.includes(:user).order(created_at: :desc)
+    @comments = @post.comments.includes(:user).order(created_at: :desc).page(params[:page])
     @comment = Comment.new
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def new
