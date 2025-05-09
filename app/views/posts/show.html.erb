@@ -18,7 +18,7 @@
       </div>
       <% if user_signed_in? %>
         <div class="mb-4">
-          <%= form_with(model: [@post, @comment], local: true) do |f| %>
+          <%= form_with(model: [@post, @comment], local: true, data: { turbo: false }) do |f| %>
             <% if @comment.errors.any? %>
               <div class="alert alert-danger py-2">
                 <% @comment.errors[:content].each do |message| %>
@@ -39,12 +39,12 @@
         <p class="text-white">コメントするにはログインしてください。</p>
         <hr class="border border-white">
       <% end %>
-      <div class="mt-4">
+      <div id="comment_list" class="mt-4">
         <% @comments.each do |comment| %>
           <div class="mb-3 p-3 comment-container">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <div class="fw-bold text-white"><%= comment.user.name %></div>
-              <div class="small text-white"><%= time_ago_in_words(comment.created_at) %>前</div>
+              <div class="small text-white"><%= time_ago_in_words(comment.created_at, include_seconds: true) %>前</div>
             </div>
             <div class="text-white">
               <%= simple_format(h(comment.content)) %>
@@ -52,6 +52,14 @@
           </div>
         <% end %>
       </div>
+      <%= turbo_frame_tag "comment_pagination" do %>
+        <% if @comments.next_page %>
+          <div class="text-center py-4" data-controller="infinite-scroll" data-infinite-scroll-url-value="<%= url_for(page: @comments.next_page) %>">
+            <div class="spinner-border text-white">
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>

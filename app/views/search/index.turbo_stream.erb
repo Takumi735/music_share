@@ -1,0 +1,19 @@
+<%= turbo_stream.append "search-results" do %>
+  <% if params[:search_type] == "artist" %>
+    <%= render partial: 'artist', collection: @artists, as: :artist %>
+  <% elsif params[:search_type] == "track" %>
+    <%= render partial: 'track', collection: @tracks, as: :track %>
+  <% end %>
+  <% if (@artists&.size.to_i >= 10) || (@tracks&.size.to_i >= 10) %>
+    <div class="text-center py-4"
+         data-controller="infinite-scroll"
+         data-infinite-scroll-url-value="<%= search_path(
+           query: params[:query],
+           search_type: params[:search_type],
+           page: (params[:page].to_i || 1) + 1,
+           format: :turbo_stream
+         ) %>">
+      <div class="spinner-border text-white"></div>
+    </div>
+  <% end %>
+<% end %>
