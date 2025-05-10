@@ -1,7 +1,7 @@
-<main class="d-flex align-items-center justify-content-center main-container">
+<main class="d-flex align-items-center justify-content-center main-container py-5">
   <div class="card custom-card p-4 card-container">
     <h2 class="mb-3 text-center">新規登録</h2>
-    <%= form_with(model: resource, url: registration_path(resource_name), local: true) do |f| %>
+    <%= form_with(model: resource, url: registration_path(resource_name), local: true, data: { turbo: false }) do |f| %>
       <div class="form-floating mb-3">
         <%= f.text_field :name, class: "form-control #{'is-invalid' if resource.errors[:name].present?}", id: "floatingName", placeholder: "Your Name", autofocus: true, autocomplete: "name" %>
         <%= f.label :name, "Name", for: "floatingName" %>

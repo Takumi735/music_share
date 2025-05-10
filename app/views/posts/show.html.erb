@@ -1,9 +1,9 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row">
-    <div class="col-md-4 col-lg-3">
+    <div class="col-md-3 d-none d-md-block">
       <%= render "shared/menu" %>
     </div>
-    <div class="col-md-8 col-lg-9">
+    <div class="col-md-9">
       <div class="mb-2">
         <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/<%= @post.spotify_track_id %>?utm_source=generator" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
