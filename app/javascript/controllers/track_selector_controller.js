@@ -1,6 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+static targets = ["trackId", "title", "artist", "preview"]
+
   select(event) {
     const target = event.currentTarget
 
@@ -9,12 +11,12 @@ export default class extends Controller {
     const artist = target.dataset.trackSelectorArtist
     const image = target.dataset.trackSelectorImage
 
-    document.getElementById("post_spotify_track_id").value = id
-    document.getElementById("post_song_title").value = title
-    document.getElementById("post_artist_name").value = artist
+    this.trackIdTarget.value = id
+    this.titleTarget.value = title
+    this.artistTarget.value = artist
+    this.trackIdTarget.dispatchEvent(new Event("change"))
 
-    const preview = document.getElementById("selected-track")
-    preview.innerHTML = `
+    this.previewTarget.innerHTML = `
       <div class="d-flex align-items-center mb-3 p-2 bg-light rounded w-100">
         <div class="me-3">
           <img src="${image}" alt="${title}" class="track-image rounded">
