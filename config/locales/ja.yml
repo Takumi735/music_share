@@ -15,6 +15,7 @@ ja:
               too_short: "パスワードは最低 %{count} 文字以上にしてください"
             current_password:
               blank: "現在のパスワードを入力してください"
+              invalid: "パスワードが正しくありません"
         comment:
           attributes:
             content:
