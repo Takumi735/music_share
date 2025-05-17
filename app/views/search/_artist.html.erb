@@ -1,5 +1,5 @@
 <%= link_to posts_path(artist_name: artist.name), class: "text-decoration-none" do %>
-  <div class="card mb-3 p-2 text-white">
+  <div class="card mb-3 p-2 text-white artist-result-item">
     <div class="card-body d-flex align-items-center">
       <% if artist.images.any? %>
         <%= image_tag(artist.images.first["url"], alt: artist.name, class: "me-3 rounded-circle search-image") %>
