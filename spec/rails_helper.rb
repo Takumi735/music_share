@@ -79,12 +79,13 @@ RSpec.configure do |config|
     end
   end
 
-RSpec.configure do |config|
-  config.include Devise::Test::IntegrationHelpers, type: :system
+  RSpec.configure do |config|
+    config.include Devise::Test::IntegrationHelpers, type: :system
 
-  config.before(:each, type: :system) do
-    driven_by :selenium_chrome_headless
+    config.before(:each, type: :system) do
+      driven_by :selenium_chrome_headless
+    end
   end
-end
+
   Capybara.default_max_wait_time = 5
 end
