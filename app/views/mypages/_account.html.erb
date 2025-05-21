@@ -14,6 +14,10 @@
     </div>
   </div>
   <div class="mt-4">
-    <%= link_to "編集する", edit_user_registration_path, class: "btn btn-outline-light" %>
+    <% if current_user.guest? %>
+      <%= link_to "編集する", "#", class: "btn btn-outline-light disabled" %>
+    <% else %>
+      <%= link_to "編集する", edit_user_registration_path, class: "btn btn-outline-light" %>
+    <% end %>
   </div>
 </div>
