@@ -8,7 +8,7 @@ export default class extends Controller {
   connect() {
     this.updateIcon()
   }
-
+  
   toggle(event) {
     event.preventDefault()
     event.stopPropagation()
@@ -16,10 +16,13 @@ export default class extends Controller {
     const method = this.likedValue ? "DELETE" : "POST"
     const url = `/posts/${this.postIdValue}/like`
 
+    const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]')
+    const csrfToken = csrfTokenMeta ? csrfTokenMeta.content : ""
+
     fetch(url, {
       method: method,
       headers: {
-        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+        "X-CSRF-Token": csrfToken,
         "Content-Type": "application/json"
       },
       credentials: "same-origin"
@@ -27,11 +30,7 @@ export default class extends Controller {
       if (response.ok) {
         this.likedValue = !this.likedValue
         this.updateIcon()
-        if (this.likedValue) {
-          this.showToast("いいねしました！")
-        } else {
-          this.showToast("いいねを取り消しました")
-        }
+        this.showToast(this.likedValue ? "いいねしました！" : "いいねを取り消しました")
       }
     })
   }

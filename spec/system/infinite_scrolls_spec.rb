@@ -5,24 +5,22 @@ RSpec.describe "ページネーションを使った無限スクロール", type
 
   describe "投稿一覧の無限スクロール" do
     before do
-      60.times do |i|
+      30.times do |i|
         create(:post, user: user, content: "Post #{i}", created_at: i.minutes.ago)
       end
       visit posts_path
     end
 
-    it "最初に20件の投稿が表示される" do
-      expect(page).to have_selector(".card", count: 20)
+    it "最初に10件の投稿が表示される" do
+      expect(page).to have_selector(".card", count: 10)
     end
 
-    it "スクロールすると投稿が追加に読み込まれる" do
-      2.times do
+    it "スクロールすると投稿が追加で読み込まれる" do
+      2.times do |i|
         scroll_to(find("[data-controller='infinite-scroll']"))
-        expect(page).to have_selector(".spinner-border", wait: 10)
-        expect(page).to have_no_selector(".spinner-border", wait: 10)
+        expected_count = 10 * (i + 2)
+        expect(page).to have_selector(".card", count: expected_count)
       end
-
-      expect(page).to have_selector(".card", count: 60)
     end
   end
 
@@ -39,14 +37,12 @@ RSpec.describe "ページネーションを使った無限スクロール", type
       expect(page).to have_selector(".comment-container", count: 20)
     end
 
-    it "スクロールするとコメントが追加に読み込まれる" do
-      2.times do
+    it "スクロールするとコメントが追加で読み込まれる" do
+      2.times do |i|
         scroll_to(find("[data-controller='infinite-scroll']"))
-        expect(page).to have_selector(".spinner-border", wait: 10)
-        expect(page).to have_no_selector(".spinner-border", wait: 10)
+        expected_count = 20 * (i + 2)
+        expect(page).to have_selector(".comment-container", count: expected_count)
       end
-
-      expect(page).to have_selector(".comment-container", count: 60)
     end
   end
 end

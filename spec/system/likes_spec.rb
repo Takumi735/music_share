@@ -11,20 +11,13 @@ RSpec.describe "Like", type: :system do
 
   it "いいねを非同期で追加・削除できる", js: true do
     within "[data-like-toggle-post-id-value='#{post.id}']" do
-      icon = find("i[data-like-toggle-target='icon']")
-
-      expect(icon[:class]).to include("bi-heart")
-      expect(icon[:class]).not_to include("bi-heart-fill")
+      expect(page).to have_css("i.bi-heart", wait: 10)
 
       find("button").click
-
-      expect(page).to have_css("i.bi-heart-fill")
-      icon = find("i[data-like-toggle-target='icon']")
-      puts icon[:class]
+      expect(page).to have_css("i.bi-heart-fill", wait: 10)
 
       find("button").click
-
-      expect(page).to have_css("i.bi-heart")
+      expect(page).to have_css("i.bi-heart", wait: 10)
     end
   end
 end

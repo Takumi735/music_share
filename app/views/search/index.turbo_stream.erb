@@ -10,7 +10,7 @@
          data-infinite-scroll-url-value="<%= search_path(
            query: params[:query],
            search_type: params[:search_type],
-           page: (params[:page].to_i || 1) + 1,
+           page: (params[:page].to_i) + 1,
            format: :turbo_stream
          ) %>">
       <div class="spinner-border text-white"></div>
