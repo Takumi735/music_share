@@ -47,8 +47,8 @@ class PostsController < ApplicationController
     if @post.user == current_user
       @post.destroy
       redirect_to posts_path, notice: "投稿を削除しました。"
+    end
   end
-end
 
 private
 

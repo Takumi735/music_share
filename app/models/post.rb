@@ -8,4 +8,5 @@ class Post < ApplicationRecord
   validates :song_title, presence: true
   validates :artist_name, presence: true
   validates :content, length: { maximum: 300 }
+  paginates_per 10
 end
