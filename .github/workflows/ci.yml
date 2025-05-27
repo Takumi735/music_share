@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - develop
 
 jobs:
   test_and_lint:
@@ -41,13 +40,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3.3'
-          bundler-cache: false
+          bundler-cache: true
 
       - name: Install dependencies
         run: |
           gem install bundler
           bundle config set --local path 'vendor/bundle'
-          bundle update net-pop net-protocol
           bundle install --jobs 4 --retry 3
 
       - name: Setup database
@@ -61,14 +59,3 @@ jobs:
 
       - name: Run RuboCop
         run: bundle exec rubocop
-
-  deploy:
-    needs: test_and_lint
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Deploy to Railway
-        uses: railwayapp/cli-action@v1
-        with:
-          railwayToken: ${{ secrets.RAILWAY_TOKEN }}
