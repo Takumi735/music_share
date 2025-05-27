@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "track-search-results" do %>
+  <%= render partial: "tracks/track_result", collection: @tracks, as: :track %>
+<% end %>

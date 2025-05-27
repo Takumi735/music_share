@@ -1,0 +1,10 @@
+<%= turbo_stream.append "comment_list" do %>
+  <%= render partial: "posts/comment", collection: @comments, as: :comment %>
+<% end %>
+<%= turbo_stream.append "comment_pagination" do %>
+  <% if @comments.next_page %>
+    <div class="text-center py-4" data-controller="infinite-scroll" data-infinite-scroll-url-value="<%= url_for(page: @comments.next_page) %>">
+      <div class="spinner-border text-white"></div>
+    </div>
+  <% end %>
+<% end %>

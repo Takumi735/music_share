@@ -1,0 +1,15 @@
+<% if message.present? %>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3 z-3" data-controller="toast">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+      data-bs-autohide="true" data-bs-delay="3000">
+      <div class="toast-header text-success">
+        <i class="fas fa-check-circle me-1"></i>
+        <strong class="me-auto">完了</strong>
+        <button class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        <%= message %>
+      </div>
+    </div>
+  </div>
+<% end %>

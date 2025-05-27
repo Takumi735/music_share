@@ -1,0 +1,30 @@
+@import "bootstrap";
+@import "devise";
+@import "posts";
+@import "menu";
+@import "search";
+@import "track_result";
+
+html,
+body {
+  background-color: #262626;
+  min-height: calc(100vh - 64px);
+  padding-top: 64px;
+}
+
+.container {
+  max-width: 980px;
+}
+
+.custom-card {
+    background-color: white;
+}
+
+.custom-card:hover {
+  opacity: 1;
+}
+
+.track-image {
+  width: 64px;
+  height: 64px;
+}

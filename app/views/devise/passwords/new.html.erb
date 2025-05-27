@@ -1,0 +1,20 @@
+<main class="d-flex align-items-center justify-content-center main-container py-5">
+  <div class="card custom-card p-4 card-container">
+    <h4 class="mb-3 text-center">パスワードをお忘れですか？</h4>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), local: true, data: { turbo: false }) do |f| %>
+      <div class="form-floating mb-3">
+        <%= f.email_field :email, class: "form-control #{'is-invalid' if resource.errors[:email].present?}", id: "floatingEmail", placeholder: "name@example.com", autofocus: true, autocomplete: "email" %>
+        <%= f.label :email, "Email address", for: "floatingEmail" %>
+        <% if resource.errors[:email].present? %>
+          <div class="invalid-feedback">
+            <%= resource.errors[:email].join(", ") %>
+          </div>
+        <% end %>
+      </div>
+      <button class="btn btn-primary w-100 btn-lg" type="submit">パスワード再設定メールを送信</button>
+    <% end %>
+    <div class="text-center mt-3">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</main>

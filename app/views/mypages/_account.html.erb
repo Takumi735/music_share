@@ -1,0 +1,23 @@
+<div class="container my-5">
+  <div class="text-white">
+    <div class="d-flex mb-3">
+      <div class="me-4 w-25 flex-shrink-0">メールアドレス</div>
+      <div class="flex-grow-1"><%= current_user.email %></div>
+    </div>
+    <div class="d-flex mb-3">
+      <div class="me-4 w-25 flex-shrink-0">パスワード</div>
+      <div class="flex-grow-1">********</div>
+    </div>
+    <div class="d-flex mb-3">
+      <div class="me-4 w-25 flex-shrink-0">ユーザー名</div>
+      <div class="flex-grow-1"><%= current_user.name %></div>
+    </div>
+  </div>
+  <div class="mt-4">
+    <% if current_user.guest? %>
+      <%= link_to "編集する", "#", class: "btn btn-outline-light disabled" %>
+    <% else %>
+      <%= link_to "編集する", edit_user_registration_path, class: "btn btn-outline-light" %>
+    <% end %>
+  </div>
+</div>

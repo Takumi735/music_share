@@ -1,0 +1,40 @@
+<div class="container py-5">
+  <div class="post-container mx-auto p-4 bg-white rounded" data-controller="track-selector">
+    <%= form_with(model: @post, local: true, data: { turbo: false, controller: "post-validator" }) do |f| %>
+      <div class="d-flex justify-content-center align-items-center mb-4">
+        <h5 class="mb-0 dflex">投稿を作成</h5>
+      </div>
+      <div class="d-flex align-items-center mb-3 p-2 bg-light rounded" data-track-selector-target="preview">
+        <div class="me-3">
+          <div class="track-image bg-secondary rounded"></div>
+        </div>
+        <div class="flex-grow-1">
+          <p class="mb-0 text-dark">曲を選択してください</p>
+        </div>
+        <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#trackModal">変更</button>
+      </div>
+      <%= f.hidden_field :spotify_track_id, data: { track_selector_target: "trackId", post_validator_target: "track", action: "change->post-validator#toggleSubmit" } %>
+      <%= f.hidden_field :song_title, data: { track_selector_target: "title" } %>
+      <%= f.hidden_field :artist_name, data: { track_selector_target: "artist" } %>
+      <div class="mb-3" data-controller="comment-counter">
+        <%= f.text_area :content, 
+              class: "form-control", 
+              rows: 5, placeholder: "音楽の感想や思い出を書いてみましょう",
+              data: { comment_counter_target: "textarea", 
+              action: "input->comment-counter#updateCount" } %>
+        <div class="d-flex justify-content-between small mt-1">
+          <div class="text-danger invisible" data-comment-counter-target="warning">
+            ※ コメントは300文字以内で入力してください。
+          </div>
+          <div class="text-muted text-end" data-comment-counter-target="counter">
+            0 / 300
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <%= f.submit "投稿", class: "btn btn-primary", data: { post_validator_target: "submit" }, disabled: true %>
+      </div>
+    <% end %>
+    <%= render "tracks/modal" %>
+  </div>
+</div>

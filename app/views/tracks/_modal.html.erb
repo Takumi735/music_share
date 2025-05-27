@@ -1,0 +1,20 @@
+<div class="modal fade" id="trackModal" tabindex="-1" aria-labelledby="trackModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="trackModalLabel">曲の検索</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: search_tracks_path, method: :get, data: { turbo_frame: "track-search-results" }, local: false do |f| %>
+          <div class="input-group mb-3">
+            <%= f.text_field :query, value: params[:query], class: "form-control", placeholder: "曲名を入力してください" %>
+            <button class="btn btn-outline-secondary" type="submit">検索</button>
+          </div>
+        <% end %>
+        <%= turbo_frame_tag "track-search-results" do %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 d-none d-md-block">
+      <%= render "shared/menu" %>
+    </div>
+    <div class="col-md-9">
+      <%= render "shared/search_form" %>
+      <div id="post_list">
+        <% @posts.each do |post| %>
+          <div class="card mb-4">
+            <%= link_to post_path(post), class: "text-decoration-none" do %>
+              <div class="card-body">
+                <div class="card-header d-flex justify-content-between">
+                  <h5 class="user-name text-white"><%= post.user.name %></h5>
+                  <p class="text-white small mb-0"><%= time_ago_in_words(post.created_at, include_seconds: true) %>前</p>
+                </div>
+                <iframe class="spotify-embed"
+                        src="https://open.spotify.com/embed/track/<%= post.spotify_track_id %>?utm_source=generator"
+                        allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"></iframe>
+                <% if post.content.present? %>
+                  <p class="mt-2 text-white p"><%= post.content %></p>
+                <% end %>
+                <% if user_signed_in? %>
+                  <div class="mt-2 d-flex">
+                    <div data-controller="like-toggle" data-like-toggle-liked-value="<%= post.likes.exists?(user: current_user) %>" data-like-toggle-post-id-value="<%= post.id %>">
+                      <button class="border-0 bg-transparent like-button" data-action="click->like-toggle#toggle">
+                        <i data-like-toggle-target="icon" class="bi fs-5 text-danger"></i>
+                      </button>
+                    </div>
+                    <% if post.user == current_user %>
+                      <div class="dropend" data-controller="dropdown-stop">
+                        <button class="btn btn-sm border-0 post-menu-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-action="click->dropdown-stop#stop">
+                          <i class="bi bi-three-dots text-white"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" data-action="click->dropdown-stop#stop">
+                          <li>
+                            <%= button_to "削除", post_path(post), method: :delete, data: { turbo: false }, class: "dropdown-item text-danger small" %>
+                          </li>
+                        </ul>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <%= turbo_frame_tag "post_pagination" do %>
+        <% if @posts.next_page %>
+          <div class="text-center py-4" data-controller="infinite-scroll" data-infinite-scroll-url-value="<%= url_for(page: @posts.next_page) %>">
+            <div class="spinner-border text-white"></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

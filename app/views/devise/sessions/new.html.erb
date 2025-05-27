@@ -1,0 +1,30 @@
+<main class="d-flex align-items-center justify-content-center main-container py-5">
+  <div class="card custom-card p-4 card-container">
+    <h2 class="mb-3 text-center">ログイン</h2>
+    <%= form_with(model: resource, url: session_path(resource_name), local: true, data: { turbo: false }) do |f| %>
+      <div class="form-floating mb-3">
+        <%= f.email_field :email, class: "form-control #{'is-invalid' if flash[:alert].present?}", id: "floatingInput", placeholder: "name@example.com", autofocus: true, autocomplete: "email" %>
+        <%= f.label :email, "Email address", for: "floatingInput" %>
+      </div>
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, class: "form-control #{'is-invalid' if flash[:alert].present?}", id: "floatingPassword", placeholder: "Password", autocomplete: "current-password" %>
+        <%= f.label :password, "Password", for: "floatingPassword" %>
+        <% if flash[:alert].present? %>
+          <div class="invalid-feedback">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check my-3">
+          <%= f.check_box :remember_me, class: "form-check-input", id: "flexCheckDefault" %>
+          <%= f.label :remember_me, "ログイン状態を保持", class: "form-check-label", for: "flexCheckDefault" %>
+        </div>
+      <% end %>
+      <button class="btn btn-primary w-100 btn-lg" type="submit">ログイン</button>
+      <div class="text-center mt-3">
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+  </div>
+</main>

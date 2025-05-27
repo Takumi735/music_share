@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 d-none d-md-block">
+      <%= render "shared/menu" %>
+    </div>
+    <div class="col-md-9">
+      <%= render "shared/search_form" %>
+      <ul class="nav nav-tabs mt-3">
+        <li class="nav-item">
+          <%= link_to "アーティスト", search_path(query: params[:query], search_type: "artist"),
+              class: "nav-link #{params[:search_type] == "artist" ? "active" : ""}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "曲", search_path(query: params[:query], search_type: "track"),
+              class: "nav-link #{params[:search_type] == "track" ? "active" : ""}" %>
+        </li>
+      </ul>
+      <div class="mt-3" id="search-results">
+        <% if params[:search_type] == "artist" %>
+          <%= render partial: 'artist', collection: @artists, as: :artist %>
+        <% elsif params[:search_type] == "track" %>
+          <%= render partial: 'track', collection: @tracks, as: :track %>
+        <% end %>
+      </div>
+      <%= turbo_frame_tag "search_pagination" do %>
+        <% if (@artists&.size.to_i >= 10) || (@tracks&.size.to_i >= 10) %>
+          <div class="text-center py-4"
+               data-controller="infinite-scroll"
+               data-infinite-scroll-url-value="<%= search_path(
+                 query: params[:query],
+                 search_type: params[:search_type],
+                 page: (params[:page].to_i) + 1,
+                 format: :turbo_stream
+               ) %>">
+            <div class="spinner-border text-white"></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

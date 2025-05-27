@@ -1,0 +1,17 @@
+<div class="mb-2 p-2 track-result-item bg-light rounded"
+  data-action="click->track-selector#select"
+  data-track-selector-id="<%= track.id %>"
+  data-track-selector-title="<%= track.name %>"
+  data-track-selector-artist="<%= track.artists.first.name %>"
+  data-track-selector-image="<%= track.album.images.first['url'] %>">
+  <div class="d-flex align-items-center">
+    <div class="me-3">
+      <img src="<%= track.album.images.first['url'] %>" alt="<%= track.name %>"
+        class="track-image rounded">
+    </div>
+    <div class="flex-grow-1">
+      <h6 class="mb-1"><%= track.name %></h6>
+      <p class="mb-0 text-muted small"><%= track.artists.map(&:name).join(', ') %></p>
+    </div>
+  </div>
+</div>
