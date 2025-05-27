@@ -15,7 +15,4 @@ test:
   database: music_share_test
 
 production:
-  <<: *default
-  database: music_share_production
-  username: music_share
-  password: <%= ENV['MUSIC_SHARE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['MYSQL_URL'] %>

@@ -1,7 +1,11 @@
-name: Rails CI
+name: Rails CI/CD
 
 on:
+  pull_request: 
   push:
+    branches:
+      - main
+      - develop
 
 jobs:
   test_and_lint:
@@ -57,3 +61,14 @@ jobs:
 
       - name: Run RuboCop
         run: bundle exec rubocop
+
+  deploy:
+    needs: test_and_lint
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Railway
+        uses: railwayapp/cli-action@v1
+        with:
+          railwayToken: ${{ secrets.RAILWAY_TOKEN }}
