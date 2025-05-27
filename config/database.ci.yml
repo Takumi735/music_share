@@ -6,13 +6,6 @@ default: &default
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>
 
-development:
-  <<: *default
-  database: music_share_development
-
 test:
   <<: *default
   database: music_share_test
-
-production:
-  url: <%= ENV['MYSQL_URL'] %>
