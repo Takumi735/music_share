@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_02_175712) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_30_094148) do
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -36,7 +36,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_02_175712) do
     t.string "spotify_track_id"
     t.string "song_title"
     t.string "artist_name"
-    t.string "album_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
