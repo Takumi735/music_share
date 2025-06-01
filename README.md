@@ -1,24 +1,62 @@
-# README
+# Music_share - 音楽を投稿してシェア、コメントできるアプリ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## アプリURL
+https://musicshare-production.up.railway.app/
 
-Things you may want to cover:
+## サービス概要
+音楽を検索して投稿でき、コメントができるサービスです。
 
-* Ruby version
+## 開発理由
+音楽を聴くとき自然と自分の趣向に合った曲を聴きがちですが、誰かが投稿した曲をタイムラインから曲を聴くことができます。  
+また、好きな曲を語り合えるように投稿にコメントできる機能を実装しました。  
+思っても見なかったジャンル、楽曲に出会うとことができ、好きな曲をユーザーと語り合えるそんなサービスがあったらいいなという思いで開発しました。
 
-* System dependencies
+## 使用技術
+### フロントエンド
+- HTML
+- CSS (SCSS)
+- Bootstrap (CSSフレームワーク)
+- Javascript (Turbo,Stimulus)
 
-* Configuration
+### バックエンド
+- Ruby 3.3.3
+- Ruby on rails 7.2.2
 
-* Database creation
+### データベース
+- Mysql 9.3
 
-* Database initialization
+### デプロイ・インフラ
+- Railway
+- Github Actions
 
-* How to run the test suite
+## 主な機能
 
-* Services (job queues, cache servers, search engines, etc.)
+### ログイン・ログアウト
+- ログイン機能(devise)
+- ゲストログイン
+- 登録情報編集
+- トースト通知
 
-* Deployment instructions
+### ホーム画面
+- 投稿一覧降順で表示
+- いいね機能
+- 投稿の削除
+- 無限スクロール
 
-* ...
+### サーチ画面
+- Spotify APIを使った検索機能(Rspotify)
+- アーティスト、曲の検索結果をタブで切り替え
+- 無限スクロール
+
+### 投稿画面
+- 曲の選択画面モーダルで表示
+- コメントのカウント機能
+- 曲を選ぶまでボタンを無効
+
+## ER図
+
+
+## 今後の展望
+- ユーザーのプロフィール画像実装
+- 投稿、コメントのリアルタイム更新
+- タグ機能実装
