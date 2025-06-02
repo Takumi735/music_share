@@ -1,4 +1,5 @@
-# Music_share - 音楽を投稿してシェア、コメントできるアプリ
+# Music share - 音楽を投稿してシェア、コメントできるアプリ
+<img width="1470" alt="スクリーンショット 2025-05-28 17 05 19" src="https://github.com/user-attachments/assets/0ca8085a-6769-4f21-876f-f3381d6fdb31" />
 
 ## アプリURL
 https://musicshare-production.up.railway.app/
@@ -54,7 +55,7 @@ https://musicshare-production.up.railway.app/
 - 曲を選ぶまでボタンを無効
 
 ## ER図
-
+![music_share drawio](https://github.com/user-attachments/assets/4fb3cba4-aad4-473a-b96a-0f7eae7a112a)
 
 ## 今後の展望
 - ユーザーのプロフィール画像実装
