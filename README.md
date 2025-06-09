@@ -55,7 +55,7 @@ https://musicshare-production.up.railway.app/
 - 曲を選ぶまでボタンを無効
 
 ## ER図
-![music_share drawio](https://github.com/user-attachments/assets/4fb3cba4-aad4-473a-b96a-0f7eae7a112a)
+<img width="819" alt="スクリーンショット 2025-06-02 21 49 54" src="https://github.com/user-attachments/assets/d924ae9c-8ac4-4178-a0e0-22441fc9111b" />
 
 ## 今後の展望
 - ユーザーのプロフィール画像実装
